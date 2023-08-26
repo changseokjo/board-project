@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import InputBox from 'components/InputBox';
+import { commentListMock } from 'mocks';
+import CommentListItem from 'components/CommentListItem';
+import Footer from 'layouts/Footer';
 
 function App() {
   return (
-    <>
-      <InputBox />
-    </>
+    <Footer />
   );
 }
 
