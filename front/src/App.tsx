@@ -3,10 +3,18 @@ import './App.css';
 import { commentListMock } from 'mocks';
 import CommentListItem from 'components/CommentListItem';
 import Footer from 'layouts/Footer';
+import Header from 'layouts/Header';
+import { useLocation } from 'react-router-dom';
 
 function App() {
+
+  const { pathname } = useLocation();
+
   return (
-    <Footer />
+    <>
+      <Header />
+      { pathname !== '/auth' && <Footer /> }
+    </>
   );
 }
 
