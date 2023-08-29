@@ -13,8 +13,6 @@ export default function Footer() {
     window.open('https://blog.naver.com');
   }
 
-
-
   //      render: 푸터 컴포넌트 렌더링      //
   return (
     <div id='footer'>
