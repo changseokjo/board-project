@@ -4,17 +4,32 @@ import { commentListMock } from 'mocks';
 import CommentListItem from 'components/CommentListItem';
 import Footer from 'layouts/Footer';
 import Header from 'layouts/Header';
-import { useLocation } from 'react-router-dom';
+import { Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { AUTH_PATH, BOARD_DETAIL_PATH, BOARD_UPDATE_PATH, BOARD_WRITE_PATH, MAIN_PATH, SEARCH_PATH, USER_PATH } from 'constant';
+import Main from 'views/Main';
+import Search from 'views/Search';
+import BoardDetail from 'views/Board/Detail';
+import BoardUpdate from 'views/Board/Update';
+import Authentication from 'views/Authentication';
+import BoardWrite from 'views/Board/Write';
+import User from 'views/User';
+import Container from 'layouts/Container';
 
 function App() {
 
-  const { pathname } = useLocation();
-
   return (
-    <>
-      <Header />
-      { pathname !== '/auth' && <Footer /> }
-    </>
+    <Routes>
+      <Route element={<Container />}>
+        <Route path={MAIN_PATH} element={<Main />} />
+        <Route path={AUTH_PATH} element={<Authentication />} />
+        <Route path={SEARCH_PATH(':word')} element={<Search />} />
+        <Route path={BOARD_WRITE_PATH} element={<BoardWrite />} />
+        <Route path={BOARD_DETAIL_PATH(':boadrNumber')} element={<BoardDetail />} />
+        <Route path={BOARD_UPDATE_PATH(':boadrNumber')} element={<BoardUpdate />} />
+        <Route path={USER_PATH(':email')} element={<User />} />
+        <Route path='*' element={<h1>404 Not Found</h1>} />
+      </Route>
+    </Routes>
   );
 }
 
