@@ -6,6 +6,8 @@ import Top3ListItem from 'components/Top3ListItem';
 import { useNavigate } from 'react-router-dom';
 import { SEARCH_PATH } from 'constant';
 import BoardListItem from 'components/BoardListItem';
+import Pagination from 'components/Pagination';
+import { usePagination } from 'hooks';
 
 //      component: 메인 페이지      //
 export default function Main() {
@@ -45,15 +47,8 @@ export default function Main() {
     const [popularWordList, setPopularWordList] = useState<string[]>([]);
     //      state: 최신 게시물 리스트 상태      //
     const [latestBoardList, setLatestBoardList] = useState<BoardItem[]>([]);
-    //      state: 현재 페이지 번호 상태      //
-    const [currentPageNumber, setCurrentPageNumber] = useState<number>(1);
-    //      state: 현재 섹션 번호 상태      //
-    const [currentSectionNumber, setCurrentSectionNumber] = useState<number>(1);
-    //      state: 보여줄 게시물 리스트 상태      //
-    const [viewBoardList, setViewBoardList] = useState<BoardItem[]>([]);
-    //      state: 보여줄 페이지 번호 리스트 상태      //
-    const [viewPageNumberList, setViewPageNumberList] = useState<number[]>([]);
-
+    //      state: 페이지네이션 관련 상태      //
+    const { currentPageNumber, setCurrentPageNumber, currentSectionNumber, setCurrentSectionNumber, viewBoardList, viewPageNumberList, totalSection, setBoardList } = usePagination();
 
     //      function: 네비게이트 함수     //
     const navigator = useNavigate();
@@ -67,32 +62,14 @@ export default function Main() {
     useEffect(() => {
       // TODO: API 호출로 변경
       setPopularWordList(popularWordListMock);
-      setLatestBoardList(currentBoardListMock);
+      setBoardList(currentBoardListMock);
 
     }, []);
-
-    useEffect(() => {
-
-      // 성능 고려 시 이렇게 짠다...
-      // const tmpList = [];
-      // for (let index = 5 * (currentPageNumber - 1); index < 5 * currentPageNumber; index++) {
-      //   if (currentBoardListMock.length === index) break;
-      //   tmpList.push(currentBoardListMock[index]);
-      // }
-
-      // 조금 편하게 짤려고 한다...
-      const FISRT_INDEX = 5 * (currentPageNumber - 1);
-      const LAST_INDEX = 5 * currentPageNumber;
-      const tmpList = currentBoardListMock.filter((item, index) => (index >= FISRT_INDEX && index < LAST_INDEX));
-
-      setViewBoardList(tmpList);
-    }, [ currentPageNumber ]);
 
     //      render: 메인 하단 컴포넌트 렌더링     //
     return (
       <div id='main-bottom-wrapper'>
         <div className='main-bottom-container'>
-          <button onClick={() => setCurrentPageNumber(currentPageNumber + 1)}>+</button>
           <div className='main-bottom-title'>{'최신 게시물'}</div>
           <div className='main-bottom-contents-box'>
             <div className='main-bottom-latest-contents-box'>
@@ -109,7 +86,16 @@ export default function Main() {
               </div>
             </div>
           </div>
-          <div className='main-bottom-pagination-box'></div>
+          <div className='main-bottom-pagination-box'>
+            <Pagination
+              currentPageNumber={currentPageNumber}
+              currentSectionNumber={currentSectionNumber}
+              setCurrentPageNumber={setCurrentPageNumber}
+              setCurrentSectionNumber={setCurrentSectionNumber}
+              viewPageNumberList={viewPageNumberList}
+              totalSection={totalSection}
+            />
+          </div>
         </div>
       </div>
     );
