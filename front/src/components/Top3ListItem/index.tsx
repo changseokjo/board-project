@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 import { BoardItem } from 'types';
-import DefaultProfileImage from 'assets/KakaoTalk_Photo_2023-08-24-11-27-17.png'
+import DefaultProfileImage from 'assets/default-profile-image.png'
 import { useNavigate } from 'react-router-dom';
 import { BOARD_DETAIL_PATH } from 'constant';
 

@@ -63,7 +63,6 @@ export default function Main() {
       // TODO: API 호출로 변경
       setPopularWordList(popularWordListMock);
       setBoardList(currentBoardListMock);
-
     }, []);
 
     //      render: 메인 하단 컴포넌트 렌더링     //

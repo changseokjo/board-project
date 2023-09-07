@@ -13,7 +13,7 @@ const usePagination = () => {
     const [viewPageNumberList, setViewPageNumberList] = useState<number[]>([]);
 
     //      state: 전체 페이지 번호 상태      //
-    const [totalPage, setTotalPage] = useState<number>(0);    
+    const [totalPage, setTotalPage] = useState<number>(0);
     //      state: 전체 섹션 번호 상태      //
     const [totalSection, setTotalSection] = useState<number>(0);
     //      state: 전체 게시물 리스트 상태      //
@@ -55,6 +55,8 @@ const usePagination = () => {
     useEffect(() => {
         const totalPage = Math.floor((boardList.length - 1) / 5) + 1;
         const totalSection = Math.floor((boardList.length - 1) / 50) + 1;
+        setCurrentPageNumber(1);
+        setCurrentSectionNumber(1);
         setTotalPage(totalPage);
         setTotalSection(totalSection);
 
