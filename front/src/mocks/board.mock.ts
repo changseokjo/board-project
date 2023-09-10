@@ -9,7 +9,7 @@ const boardMock: Board = {
     'https://image.ytn.co.kr/osen/2022/12/8ba8903c-8c97-4bc6-a544-b80ecad2624e.jpg'
   ],
   writeDatetime: '2023. 09. 07.',
-  writeEmail: 'email@email.com',
+  writerEmail: 'email@email.com',
   nickname: '주코야키',
   profileImageUrl: null,
 };

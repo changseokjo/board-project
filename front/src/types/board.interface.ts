@@ -4,7 +4,7 @@ export default interface Board {
     contents: string;
     imageUrls: string[];
     writeDatetime: string;
-    writeEmail: string;
+    writerEmail: string;
     nickname: string;
     profileImageUrl: string | null;
 }
