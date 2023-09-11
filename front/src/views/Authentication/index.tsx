@@ -213,8 +213,6 @@ export default function Authentication() {
     const onConsentCheckHandler = () => {
       setConsent(!consent);
     }
-
-
     //      event handler: 다음 단계 버튼 클릭 이벤트 처리      //
     const onNextStepButtonClickHandler = () => {
 
