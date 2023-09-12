@@ -33,23 +33,23 @@ export default function BoardDetail() {
     //          event handler: 작성자 클릭 이벤트 처리          //
     const onNicknameClickHandler = () => {
       if (!board) return;
-      navigator(USER_PATH(board?.writerEmail));
-    }
+      navigator(USER_PATH(board.writerEmail));
+    };
 
     //          event handler: more button 클릭 이벤트 처리          //
     const onMoreButtonClickHandler = () => {
       setShowMore(!showMore);
-    }
+    };
     //          event handler: 수정 버튼 클릭 이벤트 처리          //
     const onUpdateButtonClickHandler = () => {
       if (!boardNumber) return;
       navigator(BOARD_UPDATE_PATH(boardNumber));
-    }
+    };
     //          event handler: 삭제 버튼 클릭 이벤트 처리          //
     const onDeleteButtonClickHandler = () => {
       alert(`${boardNumber} 게시물 삭제!`);
       navigator(MAIN_PATH);
-    }
+    };
 
     //          effect: 게시물 번호 path variable이 바뀔때 마다 게시물 불러오기          //
     useEffect(() => {

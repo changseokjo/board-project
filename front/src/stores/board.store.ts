@@ -1,27 +1,27 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface BoardStore {
     title: string;
     contents: string;
-    image: File | null;
+    images: File[];
 
     setTitle: (title: string) => void;
     setContents: (contents: string) => void;
-    setImage: (image: File | null) => void;
+    setImages: (images: File[]) => void;
 
     resetBoard: () => void;
 }
 
-const useBoardStore = create<BoardStore>((set) => ({ 
+const useBoardStore = create<BoardStore>((set) => ({
     title: '',
     contents: '',
-    image: null,
+    images: [],
 
-    setTitle: (title: string) => { set((state) => ({ ...state, title }))},
-    setContents: (contents: string) => { set((state) => ({ ...state, contents }))},
-    setImage: (image: File | null) => { set((state) => ({ ...state, image }))},
-    
-    resetBoard: () => { set((state) => ({ ...state, title:'', contents: '', image: null })) }
- }));
+    setTitle: (title: string) => {set((state) => ({ ...state, title }))},
+    setContents: (contents: string) => {set((state) => ({ ...state, contents }))},
+    setImages: (images: File[]) => {set((state) => ({ ...state, images }))},
 
- export default useBoardStore;
+    resetBoard: () => {set((state) => ({ ...state, title: '', contents: '', images: [] }))}
+}));
+
+export default useBoardStore;
