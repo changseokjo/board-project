@@ -15,17 +15,22 @@ import BoardWrite from 'views/Board/Write';
 import User from 'views/User';
 import Container from 'layouts/Container';
 import axios from 'axios';
+import { error } from 'console';
 
 function App() {
 
   const serverCheck = async () => {
     const response = await axios.get("http://localhost:4000");
-    console.log(response.data)
+    return response.data;
   }
 
   useEffect(() => {
-    serverCheck();
-  }, [])
+    serverCheck()
+      .then(data => console.log(data))
+      .catch((error) => {
+        console.log(error.response.data);
+      });
+  }, []);
 
   return (
     <Routes>
