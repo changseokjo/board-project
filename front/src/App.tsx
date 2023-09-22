@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { commentListMock } from 'mocks';
 import CommentListItem from 'components/CommentListItem';
@@ -14,8 +14,18 @@ import Authentication from 'views/Authentication';
 import BoardWrite from 'views/Board/Write';
 import User from 'views/User';
 import Container from 'layouts/Container';
+import axios from 'axios';
 
 function App() {
+
+  const serverCheck = async () => {
+    const response = await axios.get("http://localhost:4000");
+    console.log(response.data)
+  }
+
+  useEffect(() => {
+    serverCheck();
+  }, [])
 
   return (
     <Routes>
