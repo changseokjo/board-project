@@ -2,7 +2,6 @@ package com.changseok.boardback.controller;
 
 import javax.validation.Valid;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

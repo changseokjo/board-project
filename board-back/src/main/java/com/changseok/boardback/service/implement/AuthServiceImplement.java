@@ -1,6 +1,5 @@
 package com.changseok.boardback.service.implement;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -70,7 +69,7 @@ public class AuthServiceImplement implements AuthService {
         try {
             
             String email = dto.getEmail();
-            UserEntity userEntity = userRepository.findeByEmail(email);
+            UserEntity userEntity = userRepository.findByEmail(email);
             if (userEntity == null) return SignInResponseDto.signInFailed();
 
             String password = dto.getPassword();
