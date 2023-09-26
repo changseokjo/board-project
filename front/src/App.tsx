@@ -23,13 +23,14 @@ function App() {
   //          state: 로그인 유저 상태          //
   const { user, setUser } = useUserStore();
   //          state: cookie 상태          //
-  const [cookies, setCookie] = useCookies();
+  const [cookies, setCookies] = useCookies();
 
   //          function: get sign in user response 처리 함수 //
   const getSignInUserResponse = (responseBody: GetSignInUserResponseDto | ResponseDto) => {
     const { code } = responseBody;
+
     if (code !== 'SU') {
-      setCookie('accessToken', '', { expires: new Date(), path: MAIN_PATH });
+      setCookies('accessToken', '', { expires: new Date(), path: MAIN_PATH });
       setUser(null);
       return;
     }

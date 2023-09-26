@@ -19,7 +19,7 @@ export default function Authentication() {
   //          state: 로그인 유저 전역 상태          //
   const { user, setUser } = useUserStore();
   //          state: 쿠키 상태          //
-  const [cookies, setCookie] = useCookies();
+  const [cookies, setCookies] = useCookies();
   //          state: 화면 상태          //
   const [view, setView] = useState<'sign-in' | 'sign-up'>('sign-in');
 
@@ -46,6 +46,7 @@ export default function Authentication() {
     //          function: sign in response 처리 함수          //
     const signInResponse = (responseBody: SignInResponseDto | ResponseDto) => {
       const { code } = responseBody;
+
       if (code === 'VF') alert('모두 입력해주세요.');
       if (code === 'SF') setError(true);
       if (code === 'DBE') alert('데이터베이스 오류입니다.');
@@ -56,7 +57,7 @@ export default function Authentication() {
       const now = new Date().getTime();
       const expires = new Date(now + expirationTime * 1000);
 
-      setCookie('accessToken', token, { expires, path: MAIN_PATH });
+      setCookies('accessToken', token, { expires, path: MAIN_PATH });
       navigator(MAIN_PATH);
 
     }
