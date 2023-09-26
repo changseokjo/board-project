@@ -5,6 +5,7 @@ import './style.css';
 import { useCookies } from 'react-cookie';
 import { useBoardStore, useUserStore } from 'stores';
 import { LoginUser } from 'types';
+import { access } from 'fs';
 
 //          component: 헤더 컴포넌트          //
 export default function Header() {

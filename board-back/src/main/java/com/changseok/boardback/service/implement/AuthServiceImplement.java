@@ -28,7 +28,7 @@ public class AuthServiceImplement implements AuthService {
 
     @Override
     public ResponseEntity<? super SignUpResponseDto> signUp(SignUpRequestDto dto) {
-        
+
         try {
 
             String email = dto.getEmail();
@@ -67,8 +67,9 @@ public class AuthServiceImplement implements AuthService {
         String token = null;
 
         try {
-            
+
             String email = dto.getEmail();
+
             UserEntity userEntity = userRepository.findByEmail(email);
             if (userEntity == null) return SignInResponseDto.signInFailed();
 
@@ -80,12 +81,13 @@ public class AuthServiceImplement implements AuthService {
 
             token = jwtProvider.create(email);
 
-        } catch (Exception exception) {
+        } catch(Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
 
         return SignInResponseDto.success(token);
+
     }
     
 }
