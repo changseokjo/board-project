@@ -7,5 +7,5 @@ import com.changseok.boardback.entity.BoardEntity;
 
 @Repository
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
-    
+
 }
