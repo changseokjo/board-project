@@ -19,15 +19,16 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="board")
-@Table(name="board")
+@Entity(name = "board")
+@Table(name = "board")
 public class BoardEntity {
 
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int boardNumber;
     private String title;
     private String contents;
-    private String writeDateTime;
+    private String writeDatetime;
     private int viewCount;
     private int commentCount;
     private int favoriteCount;
@@ -38,10 +39,9 @@ public class BoardEntity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String writeDatetime = simpleDateFormat.format(now);
 
-
         this.title = dto.getTitle();
         this.contents = dto.getContent();
-        this.writeDateTime = writeDatetime;
+        this.writeDatetime = writeDatetime;
         this.viewCount = 0;
         this.commentCount = 0;
         this.favoriteCount = 0;

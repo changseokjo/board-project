@@ -121,17 +121,17 @@ export default function Header() {
     const { title, contents, images, resetBoard } = useBoardStore();
 
     //          event handler: 업로드 버튼 클릭 이벤트 처리          //
-    const onUploadButtonClickHandler = () => {
+    const onUploadButtonClickHandler = async () => {
 
       const boardImageList: string[] = [];
 
-      images.forEach(async image => {
+      for (const image of images) {
         const data = new FormData();
         data.append('file', image);
 
         const url = await fileUploadRequest(data);
         if (url) boardImageList.push(url);
-      });
+      }
 
       if (isBoardWritePage) {
         alert('작성');
