@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.changseok.boardback.dto.request.board.PostBoardRequestDto;
 import com.changseok.boardback.dto.response.ResponseDto;
 import com.changseok.boardback.dto.response.board.GetBoardResponseDto;
+import com.changseok.boardback.dto.response.board.GetCommentListResponseDto;
 import com.changseok.boardback.dto.response.board.GetFavoriteListResponseDto;
 import com.changseok.boardback.dto.response.board.GetLatestBoardListResponseDto;
 import com.changseok.boardback.dto.response.board.PostBoardResponseDto;
@@ -149,6 +150,12 @@ public class BoardServiceImplement implements BoardService{
         }
 
         return PutFavoriteResponseDto.success();
+    }
+
+    @Override
+    public ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCommentList'");
     }
 
 }
