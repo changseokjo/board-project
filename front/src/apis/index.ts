@@ -3,7 +3,7 @@ import { SignInRequestDto, SignUpRequestDto } from './dto/request/auth';
 import { SignInResponseDto, SignUpResponseDto } from './dto/response/auth';
 import ResponseDto from './dto/response';
 import { GetSignInUserResponseDto, GetUserResponseDto } from './dto/response/user';
-import { PostBoardResponseDto, GetLatestBoardListResponseDto, GetBoardResponseDto, GetFavoriteListResponseDto } from './dto/response/board';
+import { PostBoardResponseDto, GetLatestBoardListResponseDto, GetBoardResponseDto, GetFavoriteListResponseDto, PutFavoriteResponseDto } from './dto/response/board';
 import { PostBoardRequestDto } from './dto/request/board';
 
 // description: Domain URL //
@@ -59,6 +59,8 @@ const GET_FAVORITE_LIST_URL = (boardNumber: string | number) => `${API_DOMAIN}/b
 const GET_LATEST_BOARD_LIST_URL = () => `${API_DOMAIN}/board/latest-list`;
 // description: post board API end point //
 const POST_BOARD_URL = () => `${API_DOMAIN}/board`;
+// description: put favorite API end point //
+const PUT_FAVORITE_URL = (boardNumber: string | number) => `${API_DOMAIN}/board/${boardNumber}/favorite`;
 
 // description: get board request //
 export const getBoardRequest = async (boardNumber: string | number) => {
@@ -117,6 +119,22 @@ export const postBoardRequest = async (requestBody: PostBoardRequestDto, token: 
         });
     return result;
 }
+
+// description: put favorite request //
+export const putFavoriteRequest = async (boardNumber: string | number, token: string) => {
+    const result = await axios.put(PUT_FAVORITE_URL(boardNumber), {}, authorization(token))
+        .then(response => {
+            const responseBody: PutFavoriteResponseDto = response.data;
+            const { code } = responseBody;
+            return code;
+        })
+        .catch(error => {
+            const responseBody: ResponseDto = error.response.data;
+            const { code } = responseBody;
+            return code;
+        })
+    return result;
+};
 
 // description: get sign in user API end point //
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;
