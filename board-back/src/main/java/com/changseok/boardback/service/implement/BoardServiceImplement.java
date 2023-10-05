@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import com.changseok.boardback.dto.request.board.PostBoardRequestDto;
 import com.changseok.boardback.dto.response.ResponseDto;
 import com.changseok.boardback.dto.response.board.GetBoardResponseDto;
+import com.changseok.boardback.dto.response.board.GetFavoriteListResponseDto;
 import com.changseok.boardback.dto.response.board.GetLatestBoardListResponseDto;
 import com.changseok.boardback.dto.response.board.PostBoardResponseDto;
 import com.changseok.boardback.entity.BoardEntity;
 import com.changseok.boardback.entity.BoardImageEntity;
 import com.changseok.boardback.entity.BoardViewEntity;
+import com.changseok.boardback.entity.UserEntity;
 import com.changseok.boardback.repository.BoardImageRepository;
 import com.changseok.boardback.repository.BoardRepository;
 import com.changseok.boardback.repository.BoardViewRepository;
@@ -83,6 +85,26 @@ public class BoardServiceImplement implements BoardService{
     }
 
     @Override
+    public ResponseEntity<? super GetFavoriteListResponseDto> getFavoriteList(Integer boardNumber) {
+
+        List<UserEntity> userEntities = new ArrayList<>();
+        
+        try {
+
+            boolean hasBoard = boardRepository.existsByBoardNumber(boardNumber);
+            if (!hasBoard) return GetFavoriteListResponseDto.notExistBoard();
+
+            userEntities = userRepository.findByBoardFavorite(boardNumber);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        
+        return GetFavoriteListResponseDto.success(userEntities);
+    }
+
+    @Override
     public ResponseEntity<? super GetLatestBoardListResponseDto> getLatestBoardList() {
         
         List<BoardViewEntity> boardViewEntities = new ArrayList<>();
@@ -98,4 +120,5 @@ public class BoardServiceImplement implements BoardService{
 
         return GetLatestBoardListResponseDto.success(boardViewEntities);
     }
+
 }
