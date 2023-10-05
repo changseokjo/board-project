@@ -9,4 +9,6 @@ import com.changseok.boardback.entity.primaryKey.FavoritePK;
 @Repository
 public interface FavoriteRepository extends JpaRepository<FavoriteEntity, FavoritePK>{
         
+    boolean existsByUserEmailAndBoardNumber(String userEmail, Integer boardNumber);
+
 }
