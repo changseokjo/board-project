@@ -3,7 +3,7 @@ import { SignInRequestDto, SignUpRequestDto } from './dto/request/auth';
 import { SignInResponseDto, SignUpResponseDto } from './dto/response/auth';
 import ResponseDto from './dto/response';
 import { GetSignInUserResponseDto, GetUserResponseDto } from './dto/response/user';
-import { PostBoardResponseDto, GetLatestBoardListResponseDto, GetBoardResponseDto, GetFavoriteListResponseDto, PutFavoriteResponseDto } from './dto/response/board';
+import { PostBoardResponseDto, GetLatestBoardListResponseDto, GetBoardResponseDto, GetFavoriteListResponseDto, PutFavoriteResponseDto, GetCommentListResponseDto } from './dto/response/board';
 import { PostBoardRequestDto } from './dto/request/board';
 
 // description: Domain URL //
@@ -55,6 +55,8 @@ export const signInRequest = async (requestBody: SignInRequestDto) => {
 const GET_BOARD_URL = (boardNumber: string | number) => `${API_DOMAIN}/board/${boardNumber}`;
 // description: get favorite list API end point //
 const GET_FAVORITE_LIST_URL = (boardNumber: string | number) => `${API_DOMAIN}/board/${boardNumber}/favorite-list`;
+// description: get comment list API end point //
+const GET_COMMENT_LIST_URL = (boardNumber: string | number) => `${API_DOMAIN}/board/${boardNumber}/comment-list`;
 // description: get latest board list API end point //
 const GET_LATEST_BOARD_LIST_URL = () => `${API_DOMAIN}/board/latest-list`;
 // description: post board API end point //
@@ -81,6 +83,20 @@ export const getFavoriteListRequest = async (boardNumber: string | number) => {
     const result = await axios.get(GET_FAVORITE_LIST_URL(boardNumber))
         .then(response => {
             const responseBody: GetFavoriteListResponseDto = response.data;
+            return responseBody;
+        })
+        .catch(error => {
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        })
+    return result;
+}
+
+// description: get comment list request //
+export const getCommentListRequest = async (boardNumber: string | number) => {
+    const result = await axios.get(GET_COMMENT_LIST_URL(boardNumber))
+        .then(response => {
+            const responseBody: GetCommentListResponseDto = response.data;
             return responseBody;
         })
         .catch(error => {
