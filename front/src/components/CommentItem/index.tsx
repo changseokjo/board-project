@@ -5,9 +5,13 @@ import DefaultProfileImage from 'assets/default-profile-image.png';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
+import 'dayjs/locale/ko';
+
+dayjs.locale('ko');
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Seoul');
 
 //          interface: 댓글 리스트 아이템 컴포넌트 Props         //
 interface Props {
@@ -24,7 +28,7 @@ export default function CommentItem({ commentItem }: Props) {
   const getElapsedTime = () => {
     //const now = dayjs().add(9, 'hour');
     const now = dayjs().tz("Asia/Seoul");
-    const writeTime = dayjs(writeDatetime);
+    const writeTime = dayjs(writeDatetime).tz("Asia/Seoul");
 
     const gap = now.diff(writeTime, 's');
     if (gap < 60) return `${gap}초 전`;
