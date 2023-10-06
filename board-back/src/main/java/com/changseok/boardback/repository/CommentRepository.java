@@ -22,8 +22,8 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
         "FROM comment AS C " +
         "INNER JOIN user AS U " +
         "ON C.user_email = U.email " +
-        "WHERE C.board_number = 3 " +
-        "ORDER BY C.write_datetime ",
+        "WHERE C.board_number = ?1 " +
+        "ORDER BY C.write_datetime DESC ",
         nativeQuery = true
     )
     List<CommentListResultSet> findByCommentList(Integer boardNumber);
