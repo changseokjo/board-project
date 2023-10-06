@@ -7,16 +7,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.changseok.boardback.dto.request.board.PostBoardRequestDto;
+import com.changseok.boardback.dto.request.board.PostCommentRequestDto;
 import com.changseok.boardback.dto.response.ResponseDto;
 import com.changseok.boardback.dto.response.board.GetBoardResponseDto;
 import com.changseok.boardback.dto.response.board.GetCommentListResponseDto;
 import com.changseok.boardback.dto.response.board.GetFavoriteListResponseDto;
 import com.changseok.boardback.dto.response.board.GetLatestBoardListResponseDto;
 import com.changseok.boardback.dto.response.board.PostBoardResponseDto;
+import com.changseok.boardback.dto.response.board.PostCommentResponseDto;
 import com.changseok.boardback.dto.response.board.PutFavoriteResponseDto;
 import com.changseok.boardback.entity.BoardEntity;
 import com.changseok.boardback.entity.BoardImageEntity;
 import com.changseok.boardback.entity.BoardViewEntity;
+import com.changseok.boardback.entity.CommentEntity;
 import com.changseok.boardback.entity.FavoriteEntity;
 import com.changseok.boardback.entity.UserEntity;
 import com.changseok.boardback.repository.BoardImageRepository;
@@ -172,6 +175,27 @@ public class BoardServiceImplement implements BoardService{
             return ResponseDto.databaseError();
         }
         return GetCommentListResponseDto.success(resultSets);
+    }
+
+    @Override
+    public ResponseEntity<? super PostCommentResponseDto> postComment(PostCommentRequestDto dto, Integer boardNumber, String email) {
+            
+        try {
+            
+            boolean existedBoard = boardRepository.existsByBoardNumber(boardNumber);
+            if (!existedBoard) return PostCommentResponseDto.notExistBoard();
+
+            boolean existedUser = userRepository.existsByEmail(email);
+            if (!existedUser) return PostCommentResponseDto.notExistUser();
+
+            CommentEntity commentEntity = new CommentEntity(dto, boardNumber, email);
+            commentRepository.save(commentEntity);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return PostCommentResponseDto.success();
     }
 
 }

@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.changseok.boardback.dto.request.board.PostBoardRequestDto;
+import com.changseok.boardback.dto.request.board.PostCommentRequestDto;
 import com.changseok.boardback.dto.response.board.GetBoardResponseDto;
 import com.changseok.boardback.dto.response.board.GetCommentListResponseDto;
 import com.changseok.boardback.dto.response.board.GetFavoriteListResponseDto;
 import com.changseok.boardback.dto.response.board.GetLatestBoardListResponseDto;
 import com.changseok.boardback.dto.response.board.PostBoardResponseDto;
+import com.changseok.boardback.dto.response.board.PostCommentResponseDto;
 import com.changseok.boardback.dto.response.board.PutFavoriteResponseDto;
 import com.changseok.boardback.service.BoardService;
 
@@ -66,6 +68,16 @@ public class BoardController {
         @AuthenticationPrincipal String email
     ){
         ResponseEntity<? super PostBoardResponseDto> response = boardService.postBoard(requestBody, email);
+        return response;
+    }
+
+    @PostMapping("/{boardNumber}/comment")
+    public ResponseEntity<? super PostCommentResponseDto> postComment(
+        @RequestBody @Valid PostCommentRequestDto requestBody,
+        @PathVariable("boardNumber") Integer boardNumber,
+        @AuthenticationPrincipal String email
+    ) {
+        ResponseEntity<? super PostCommentResponseDto> response = boardService.postComment(requestBody, boardNumber, email);
         return response;
     }
     
