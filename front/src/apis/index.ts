@@ -2,10 +2,11 @@ import axios from 'axios';
 import { SignInRequestDto, SignUpRequestDto } from './dto/request/auth';
 import { SignInResponseDto, SignUpResponseDto } from './dto/response/auth';
 import ResponseDto from './dto/response';
-import { GetSignInUserResponseDto, GetUserResponseDto } from './dto/response/user';
+import { GetSignInUserResponseDto, GetUserResponseDto, PatchNicknameResponseDto } from './dto/response/user';
 import { PostBoardResponseDto, GetLatestBoardListResponseDto, GetBoardResponseDto, GetFavoriteListResponseDto, PutFavoriteResponseDto, GetCommentListResponseDto, PostCommentResponseDto, PatchBoardResponseDto, DeleteBoardResponseDto, GetUserBoardListResponseDto, IncreaseViewCountResponseDto } from './dto/response/board';
 import { PatchBoardRequestDto, PostBoardRequestDto, PostCommentRequestDto } from './dto/request/board';
 import { error } from 'console';
+import { PatchNicknameRequestDto } from './dto/request/user';
 
 // description: Domain URL //
 const DOMAIN = 'http://localhost:4000';
@@ -247,6 +248,8 @@ export const deleteBoardRequest = async (boardNumber: string | number, token: st
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;
 // description: get user API end point //
 const GET_USER_URL = (email: string) => `${API_DOMAIN}/user/${email}`;
+// description: patch nickname API end point //
+const PATCH_NICKNAME_URL = () => `${API_DOMAIN}/user/nickname`;
 
 // description: get sign in user request //
 export const getSignInUserRequest = async (token: string) => {
@@ -276,6 +279,22 @@ export const getUserRequest = async (email: string) => {
 
     return result;
 };
+
+// description: patch nickname request //
+export const patchNicknameRequest = async (requestBody: PatchNicknameRequestDto, token: string) => {
+    const result = await axios.patch(PATCH_NICKNAME_URL(), requestBody, authorization(token))
+        .then(response => {
+            const responseBody: PatchNicknameResponseDto = response.data;
+            const { code } = responseBody;
+            return code;
+        })
+        .catch(error => {
+            const responseBody: ResponseDto = error.response.data;
+            const { code } = responseBody;
+            return code;
+        })
+    return result;
+}
 
 // description: File domain 주소 //
 const FILE_DOMAIN = `${DOMAIN}/file`;
