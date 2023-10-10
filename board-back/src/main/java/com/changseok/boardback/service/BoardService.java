@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import com.changseok.boardback.dto.request.board.PatchBoardRequestDto;
 import com.changseok.boardback.dto.request.board.PostBoardRequestDto;
 import com.changseok.boardback.dto.request.board.PostCommentRequestDto;
+import com.changseok.boardback.dto.response.board.DeleteBoardResponseDto;
 import com.changseok.boardback.dto.response.board.GetBoardResponseDto;
 import com.changseok.boardback.dto.response.board.GetCommentListResponseDto;
 import com.changseok.boardback.dto.response.board.GetFavoriteListResponseDto;
@@ -29,4 +30,5 @@ public interface BoardService {
 
     ResponseEntity<? super PatchBoardResponseDto> patchBoard(PatchBoardRequestDto dto, Integer boardNumber, String email);
 
+    ResponseEntity<? super DeleteBoardResponseDto> deleteBoard(Integer boardNumber, String email);
 }
