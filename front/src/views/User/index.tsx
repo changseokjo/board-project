@@ -8,9 +8,10 @@ import { BoardListItem } from 'types';
 import BoardItem from 'components/BoardItem';
 import Pagination from 'components/Pagination';
 import { AUTH_PATH, BOARD_WRITE_PATH, MAIN_PATH, USER_PATH } from 'constant';
-import { getUserRequest } from 'apis';
+import { getUserBoardListRequest, getUserRequest } from 'apis';
 import { GetUserResponseDto } from 'apis/dto/response/user';
 import ResponseDto from 'apis/dto/response';
+import { GetUserBoardListResponseDto } from 'apis/dto/response/board';
 
 //          component: 유저 페이지          //
 export default function User() {
@@ -38,7 +39,8 @@ export default function User() {
     const [nickname, setNickname] = useState<string>('나는주코야키');
     //          state: 닉네임 변경 상태           //
     const [showChangeNickname, setShowChangeNickname] = useState<boolean>(false);
-    //          function: get user response 처리 함수         //
+
+    //          function: get user response 처리 함수          //
     const getUserResponse = (responseBody: GetUserResponseDto | ResponseDto) => {
       const { code } = responseBody;
       if (code === 'NU') alert('존재하지 않는 유저입니다.');
@@ -132,6 +134,21 @@ export default function User() {
     //          state: 게시물 개수 상태          //
     const [count, setCount] = useState<number>(0);
 
+    //          function: get user board list response 처리 함수          //
+    const getUserBoardListResponse = (responseBody: GetUserBoardListResponseDto | ResponseDto) => {
+      const { code } = responseBody;
+      if (code === 'NU') alert('존재하지 않는 유저입니다.');
+      if (code === 'DBE') alert('데이터베이스 오류입니다.');
+      if (code !== 'SU') {
+        navigator(MAIN_PATH);
+        return;
+      }
+
+      const { userBoardList } = responseBody as GetUserBoardListResponseDto;
+      setBoardList(userBoardList);
+      setCount(userBoardList.length);
+    }
+
     //          event handler: 버튼 클릭 이벤트 처리          //
     const onButtonClickHandler = () => {
       if (!user) {
@@ -146,8 +163,11 @@ export default function User() {
 
     //          effect: 조회하는 유저의 이메일이 변경될 때 마다 실행할 함수 //
     useEffect(() => {
-      setBoardList(userBoardListMock);
-      setCount(userBoardListMock.length);
+      if (!searchEmail) {
+        navigator(MAIN_PATH);
+        return;
+      }
+      getUserBoardListRequest(searchEmail).then(getUserBoardListResponse);
     }, [searchEmail]);
 
     //          render: 유저 게시물 컴포넌트 렌더링          //
@@ -155,7 +175,7 @@ export default function User() {
       <div id='user-board-wrapper'>
         <div className='user-board-container'>
           <div className='user-board-title-box'>
-            <div className='user-board-title'>{'내 개시물 '}<span className='emphasis'>{count}</span></div>
+            <div className='user-board-title'>{'내 게시물 '}<span className='emphasis'>{count}</span></div>
           </div>
           <div className='user-board-contents-box'>
             {count === 0 ? (
