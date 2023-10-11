@@ -3,7 +3,7 @@ import { SignInRequestDto, SignUpRequestDto } from './dto/request/auth';
 import { SignInResponseDto, SignUpResponseDto } from './dto/response/auth';
 import ResponseDto from './dto/response';
 import { GetSignInUserResponseDto, GetUserResponseDto, PatchNicknameResponseDto, PatchProfileImageResponseDto } from './dto/response/user';
-import { PostBoardResponseDto, GetLatestBoardListResponseDto, GetBoardResponseDto, GetFavoriteListResponseDto, PutFavoriteResponseDto, GetCommentListResponseDto, PostCommentResponseDto, PatchBoardResponseDto, DeleteBoardResponseDto, GetUserBoardListResponseDto, IncreaseViewCountResponseDto } from './dto/response/board';
+import { PostBoardResponseDto, GetLatestBoardListResponseDto, GetBoardResponseDto, GetFavoriteListResponseDto, PutFavoriteResponseDto, GetCommentListResponseDto, PostCommentResponseDto, PatchBoardResponseDto, DeleteBoardResponseDto, GetUserBoardListResponseDto, IncreaseViewCountResponseDto, GetTop3BoardListResponseDto } from './dto/response/board';
 import { PatchBoardRequestDto, PostBoardRequestDto, PostCommentRequestDto } from './dto/request/board';
 import { error } from 'console';
 import { PatchNicknameRequestDto, PatchProfileImageRequestDto } from './dto/request/user';
@@ -63,6 +63,8 @@ const GET_COMMENT_LIST_URL = (boardNumber: string | number) => `${API_DOMAIN}/bo
 const GET_LATEST_BOARD_LIST_URL = () => `${API_DOMAIN}/board/latest-list`;
 // description: get user board list API end point //
 const GET_USER_BOARD_LIST_URL = (email: string) => `${API_DOMAIN}/board/user-board-list/${email}`;
+// description: get top 3 board list API end point //
+const GET_TOP_3_BOARD_LIST_URL = () => `${API_DOMAIN}/board/top-3`;
 // description: post board API end point //
 const POST_BOARD_URL = () => `${API_DOMAIN}/board`;
 // description: post comment API end point //
@@ -88,7 +90,7 @@ export const getBoardRequest = async (boardNumber: string | number) => {
             return responseBody;
         });
     return result;
-}
+};
 
 // description: get favorite list request //
 export const getFavoriteListRequest = async (boardNumber: string | number) => {
@@ -102,7 +104,7 @@ export const getFavoriteListRequest = async (boardNumber: string | number) => {
             return responseBody;
         })
     return result;
-}
+};
 
 // description: get comment list request //
 export const getCommentListRequest = async (boardNumber: string | number) => {
@@ -116,7 +118,7 @@ export const getCommentListRequest = async (boardNumber: string | number) => {
             return responseBody;
         });
     return result;
-}
+};
 
 // description: get latest board list request //
 export const getLatestBoardListRequest = async () => {
@@ -130,7 +132,7 @@ export const getLatestBoardListRequest = async () => {
             return responseBody;
         });
     return result;
-}
+};
 
 // description: get user board list request //
 export const getUserBoardListRequest = async (email: string) => {
@@ -144,7 +146,21 @@ export const getUserBoardListRequest = async (email: string) => {
             return responseBody;
         });
     return result;
-}
+};
+
+// description: get top 3 board list request //
+export const getTop3BoardListRequest = async () => {
+    const result = await axios.get(GET_TOP_3_BOARD_LIST_URL())
+        .then(response => {
+            const responseBody: GetTop3BoardListResponseDto = response.data;
+            return responseBody;
+        })
+        .catch(error => {
+            const responseBody: ResponseDto = error.response.data;
+            return responseBody;
+        })
+    return result;
+};
 
 // description: post board request //
 export const postBoardRequest = async (requestBody: PostBoardRequestDto, token: string) => {
@@ -160,7 +176,7 @@ export const postBoardRequest = async (requestBody: PostBoardRequestDto, token: 
             return code;
         });
     return result;
-}
+};
 
 // description: post comment request //
 export const postCommentRequest = async (requestBody: PostCommentRequestDto, boardNumber: string, token: string) => {
@@ -178,7 +194,7 @@ export const postCommentRequest = async (requestBody: PostCommentRequestDto, boa
         });
     return result;
 
-}
+};
 
 // description: put favorite request //
 export const putFavoriteRequest = async (boardNumber: string | number, token: string) => {
@@ -210,7 +226,7 @@ export const patchBoardRequest = async (requestBody: PatchBoardRequestDto, board
             return code;
         });
     return result;
-}
+};
 
 // description: increase view count request //
 export const increaseViewCountRequest = async (boardNumber: string | number) => {
@@ -226,7 +242,7 @@ export const increaseViewCountRequest = async (boardNumber: string | number) => 
             return code;
         })
     return result;
-}
+};
 
 // description: delete board request //
 export const deleteBoardRequest = async (boardNumber: string | number, token: string) => {
@@ -242,7 +258,7 @@ export const deleteBoardRequest = async (boardNumber: string | number, token: st
             return code;
         })
     return result;
-}
+};
 
 // description: get sign in user API end point //
 const GET_SIGN_IN_USER_URL = () => `${API_DOMAIN}/user`;
@@ -296,7 +312,7 @@ export const patchNicknameRequest = async (requestBody: PatchNicknameRequestDto,
             return code;
         })
     return result;
-}
+};
 
 // description: patch profile image request //
 export const patchProfileImageRequest = async (requestBody: PatchProfileImageRequestDto, token: string) => {
@@ -312,7 +328,7 @@ export const patchProfileImageRequest = async (requestBody: PatchProfileImageReq
             return code;
         })
     return result;
-}
+};
 
 // description: File domain 주소 //
 const FILE_DOMAIN = `${DOMAIN}/file`;
@@ -336,4 +352,4 @@ export const fileUploadRequest = async (data: FormData) => {
         })
     
     return result;
-}
+};
