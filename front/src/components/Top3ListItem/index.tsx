@@ -18,7 +18,7 @@ export default function Top3ListItem({ boardItem } : Props) {
   //      state: Properties     //
   const { boardNumber, title, content, boardTitleImage } = boardItem;
   const { viewCount, commentCount, favoriteCount } = boardItem;
-  const { writeDatetime, writernickname, writerProfileImage } = boardItem;
+  const { writeDatetime, writerNickname, writerProfileImage } = boardItem;
 
   //      function: 네비게이트 함수     //
   const navigator = useNavigate();
@@ -37,7 +37,7 @@ export default function Top3ListItem({ boardItem } : Props) {
             <div className='top3-list-item-profile-image' style={{ backgroundImage: `url(${writerProfileImage ? writerProfileImage : DefaultProfileImage})` }}></div>
           </div>
           <div className='top3-list-item-write-box'>
-            <div className='top3-list-item-nickname'>{writernickname}</div>
+            <div className='top3-list-item-nickname'>{writerNickname}</div>
             <div className='top3-list-item-write-date'>{getWriteDatetimeFormat(writeDatetime)}</div>
           </div>
         </div>

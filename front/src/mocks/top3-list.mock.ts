@@ -10,7 +10,7 @@ const top3ListMock: BoardListItem[] = [
         commentCount: 0,
         favoriteCount: 0,
         writeDatetime: '2023. 08. 24.',
-        writernickname: '깃허브',
+        writerNickname: '깃허브',
         writerProfileImage: null
     },
     {
@@ -22,7 +22,7 @@ const top3ListMock: BoardListItem[] = [
         commentCount: 0,
         favoriteCount: 0,
         writeDatetime: '2023. 08. 24.',
-        writernickname: '깃허브',
+        writerNickname: '깃허브',
         writerProfileImage: null
     },
     {
@@ -34,7 +34,7 @@ const top3ListMock: BoardListItem[] = [
         commentCount: 0,
         favoriteCount: 0,
         writeDatetime: '2023. 08. 24.',
-        writernickname: '깃허브',
+        writerNickname: '깃허브',
         writerProfileImage: null
     },
 ];

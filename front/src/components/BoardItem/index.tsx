@@ -17,7 +17,7 @@ export default function BoardItem({ boardItem } : Props) {
   //      state: Properties     //
   const { boardNumber, title, content, boardTitleImage } = boardItem;
   const { viewCount, commentCount, favoriteCount} = boardItem;
-  const { writeDatetime, writernickname, writerProfileImage} = boardItem;
+  const { writeDatetime, writerNickname, writerProfileImage} = boardItem;
 
   //      function: 네비게이트 함수     //
   const navigator = useNavigate();
@@ -38,7 +38,7 @@ export default function BoardItem({ boardItem } : Props) {
             <div className='board-list-item-profile-image' style={{backgroundImage: `url(${writerProfileImage ? writerProfileImage : DefaultProfileImage})` }}></div>
           </div>
           <div className='board-list-item-write-box'>
-            <div className='board-list-item-nickname'>{writernickname}</div>
+            <div className='board-list-item-nickname'>{writerNickname}</div>
             <div className='board-list-item-write-date'>{getWriteDatetimeFormat(writeDatetime)}</div>
           </div>
         </div>
