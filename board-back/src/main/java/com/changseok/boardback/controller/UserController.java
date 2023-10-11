@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.changseok.boardback.dto.request.user.PatchNicknameRequestDto;
+import com.changseok.boardback.dto.request.user.PatchProfileImageRequestDto;
 import com.changseok.boardback.dto.response.user.GetSignInUserResponseDto;
 import com.changseok.boardback.dto.response.user.GetUserResponseDto;
 import com.changseok.boardback.dto.response.user.PatchNicknameResponseDto;
+import com.changseok.boardback.dto.response.user.PatchProfileImageResponseDto;
 import com.changseok.boardback.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -43,10 +45,17 @@ public class UserController {
 
     @PatchMapping("/nickname")
     public ResponseEntity<? super PatchNicknameResponseDto> patchNickname(
-        @RequestBody @Valid PatchNicknameRequestDto requestBody,
-        @AuthenticationPrincipal String email
-    ) {
+            @RequestBody @Valid PatchNicknameRequestDto requestBody,
+            @AuthenticationPrincipal String email) {
         ResponseEntity<? super PatchNicknameResponseDto> response = userService.patchNickname(requestBody, email);
+        return response;
+    }
+
+    @PatchMapping("/profile-image")
+    public ResponseEntity<? super PatchProfileImageResponseDto> patchProfileImage(
+            @RequestBody @Valid PatchProfileImageRequestDto requestBody,
+            @AuthenticationPrincipal String email) {
+        ResponseEntity<? super PatchProfileImageResponseDto> response = userService.patchProfileImage(requestBody, email);
         return response;
     }
 

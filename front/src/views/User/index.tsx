@@ -99,6 +99,12 @@ export default function User() {
         return;
       }
 
+      const isEqual = nickname === existingNickname;
+      if (isEqual) {
+        setShowChangeNickname(false);
+        return;
+      }
+
       const accessToken = cookies.accessToken;
       if (!accessToken) return;
 
