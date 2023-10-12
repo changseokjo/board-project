@@ -3,9 +3,10 @@ import { SignInRequestDto, SignUpRequestDto } from './dto/request/auth';
 import { SignInResponseDto, SignUpResponseDto } from './dto/response/auth';
 import ResponseDto from './dto/response';
 import { GetSignInUserResponseDto, GetUserResponseDto, PatchNicknameResponseDto, PatchProfileImageResponseDto } from './dto/response/user';
-import { PostBoardResponseDto, GetLatestBoardListResponseDto, GetBoardResponseDto, GetFavoriteListResponseDto, PutFavoriteResponseDto, GetCommentListResponseDto, PostCommentResponseDto, PatchBoardResponseDto, DeleteBoardResponseDto, GetUserBoardListResponseDto, IncreaseViewCountResponseDto, GetTop3BoardListResponseDto, GetSearchBoardListResponseDto } from './dto/response/board';
+import { PostBoardResponseDto, GetLatestBoardListResponseDto, GetBoardResponseDto, GetFavoriteListResponseDto, PutFavoriteResponseDto, GetCommentListResponseDto, 
+    PostCommentResponseDto, PatchBoardResponseDto, DeleteBoardResponseDto, GetUserBoardListResponseDto, IncreaseViewCountResponseDto, GetTop3BoardListResponseDto, 
+    GetSearchBoardListResponseDto } from './dto/response/board';
 import { PatchBoardRequestDto, PostBoardRequestDto, PostCommentRequestDto } from './dto/request/board';
-import { error } from 'console';
 import { PatchNicknameRequestDto, PatchProfileImageRequestDto } from './dto/request/user';
 
 // description: Domain URL //
